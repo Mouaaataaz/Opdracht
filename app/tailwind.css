@@ -10,3 +10,14 @@ body {
     color-scheme: dark;
   }
 }
+
+main {
+  padding: 20px;
+}
+
+.dossier{
+  margin-top:25px;
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 20px;
+}
