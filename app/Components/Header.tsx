@@ -22,7 +22,9 @@ const theme = createTheme({
                     backgroundColor: "#ffffff",
                     boxShadow: "none",
                     borderBottom: "1px solid #e0e0e0",
-                    position: "relative",
+                    display:"grid",
+                    gridTemplateRows: "auto",
+                    position:"fixed",
                 },
             },
         },
@@ -48,6 +50,7 @@ const theme = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
+                    color:"black",
                     textDecoration:"none",
                     textTransform: "none",
                     gap: 5,
@@ -60,7 +63,7 @@ export function Header() {
     return (
        <>
            <ThemeProvider theme={theme}>
-               <AppBar>
+               <AppBar >
                    <Toolbar>
                        {/* Logo */}
                        <Box component="img"
