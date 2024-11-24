@@ -1,65 +1,18 @@
 import type { LinksFunction } from "@remix-run/node";
 import { Box, Typography } from "@mui/material";
 
+
 import appStylesHref from "../tailwind.css";
 import { Header } from "~/Components/Header";
 import {Sidebar} from "~/Components/Sidebar";
+import { layoutStyles, mapStyles } from "../Components/styles";
+
 
 export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: appStylesHref },
+    { rel: "stylesheet", href: appStylesHref, },
+    { rel: "stylesheet", href: "https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" }, // Leaflet styles
+
 ];
-
-
-const layoutStyles = {
-    container: {
-        display: "grid",
-        gridTemplateRows: "64px auto", // Header row and content row
-        gridTemplateColumns: "1fr", // Single column for full-width elements
-        height: "100vh", // Full viewport height
-        gap: 0, // Remove unnecessary row gaps
-    },
-    header: {
-        gridColumn: "1 / -1",
-        padding: "16px",
-    },
-    contentContainer: {
-        display: "grid",
-        gridTemplateRows: "auto 1fr",
-        gridTemplateColumns: "300px 1fr",
-        gap: "16px",
-        padding: "16px",
-        height:"calc(100vh - 64px)"
-    },
-    dossiersTitle: {
-        gridColumn: "1 / -1",
-        marginBottom: "8px",
-    },
-};
-
-const sidebarStyles = {
-    sidebarContainer: {
-        marginLeft: "40px",
-        fontWeight: "bold",
-    },
-};
-
-const mapStyles = {
-    container: {
-        backgroundColor: "#f1f1f1f1",
-        borderRadius: "40px",
-        position: "relative",
-        overflow: "hidden",
-        height: "100%",
-    },
-    placeholderText: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        color: "#aaa",
-    },
-};
-
 
 export default function Index() {
     return (
@@ -73,7 +26,7 @@ export default function Index() {
             <Box sx={layoutStyles.contentContainer}>
                 {/* "Dossiers" Title */}
                 <Box sx={layoutStyles.dossiersTitle}>
-                    <Typography sx={sidebarStyles.sidebarContainer}>
+                    <Typography >
                         Dossiers
                     </Typography>
                 </Box>

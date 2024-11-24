@@ -1,54 +1,6 @@
 import { Box, Typography, Paper, IconButton, Checkbox, Divider } from "@mui/material";
+import { sidebarStyles, boxStyles, typographyStyles } from "~/Components/styles";
 
-
-const sidebarStyles = {
-    container: {
-        width: "300px",
-        backgroundColor: "#f9f9f9",
-        borderRadius: "8px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        height: "100%",
-        overflowY: "auto",
-    },
-    filterSection: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-    },
-};
-
-const typographyStyles ={
-    container:{
-        backgroundColor: "#899499",
-        padding:"15px"
-
-    }
-}
-
-const boxStyles = {
-    container: {
-        width:"95%",
-        display: "flex",
-        flexDirection: "column",
-        padding: "16px",
-        borderRadius: "16px",
-        backgroundColor: "#fff",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-        gap: "8px",
-    },
-    header: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-    },
-    footer: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-};
 
 function SidebarBox() {
     return (

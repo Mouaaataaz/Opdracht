@@ -1,64 +1,13 @@
-import type { LinksFunction } from "@remix-run/node";
 import {
     AppBar,
     Box,
     Toolbar,
     Button,
     ThemeProvider,
-    createTheme,
 } from "@mui/material";
+import { theme } from "./styles";
 
-import appStylesHref from "../tailwind.css";
 
-export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: appStylesHref },
-];
-
-const theme = createTheme({
-    components: {
-        MuiAppBar: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: "#ffffff",
-                    boxShadow: "none",
-                    borderBottom: "1px solid #e0e0e0",
-                    display:"grid",
-                    gridTemplateRows: "auto",
-                    position:"fixed",
-                },
-            },
-        },
-        MuiToolbar: {
-            styleOverrides: {
-                root: {
-                    display: "flex",
-                    justifyContent: "space-between",
-                },
-            },
-        },
-        MuiBox: {
-            styleOverrides: {
-                root: {
-                    color: "black",
-                    display: "flex",
-                    flexGrow: 1,
-                    alignItems: "center",
-                    gap: 4,
-                },
-            },
-        },
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    color:"black",
-                    textDecoration:"none",
-                    textTransform: "none",
-                    gap: 5,
-                },
-            },
-        },
-    },
-});
 export function Header() {
     return (
        <>
