@@ -28,6 +28,7 @@ const layoutStyles = {
         gridTemplateColumns: "300px 1fr",
         gap: "16px",
         padding: "16px",
+        height:"calc(100vh - 64px)"
     },
     dossiersTitle: {
         gridColumn: "1 / -1",
