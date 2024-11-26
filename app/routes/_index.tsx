@@ -1,18 +1,12 @@
-import type { LinksFunction } from "@remix-run/node";
+
 import { Box, Typography } from "@mui/material";
 
 
-import appStylesHref from "../tailwind.css";
 import { Header } from "~/Components/Header";
 import {Sidebar} from "~/Components/Sidebar";
-import { layoutStyles, mapStyles } from "../Components/styles";
+import { MapView} from "~/Components/Map";
+import { layoutStyles, mapStyles } from "~/Components/styles";
 
-
-export const links: LinksFunction = () => [
-    { rel: "stylesheet", href: appStylesHref, },
-    { rel: "stylesheet", href: "https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" }, // Leaflet styles
-
-];
 
 export default function Index() {
     return (
@@ -36,9 +30,7 @@ export default function Index() {
                 {/* Main Content Section (Map) */}
                 <Box sx={mapStyles.container}>
                     {/* Placeholder for the map */}
-                    <Typography sx={mapStyles.placeholderText}>
-                        Map or Content Goes Here
-                    </Typography>
+                    <MapView />
                 </Box>
             </Box>
         </Box>

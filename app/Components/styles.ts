@@ -12,6 +12,7 @@ export const theme = createTheme({
                     display: "grid",
                     gridTemplateRows: "auto",
                     position: "fixed",
+                    zIndex: 1201,
                 },
             },
         },
@@ -20,6 +21,7 @@ export const theme = createTheme({
                 root: {
                     display: "flex",
                     justifyContent: "space-between",
+                    alignItems:"center",
                 },
             },
         },
@@ -44,6 +46,21 @@ export const theme = createTheme({
                 },
             },
         },
+        MuiDrawer: {
+            styleOverrides:{
+                paper: {
+                    width:"250px",
+                    padding:"16px"
+                },
+            },
+        },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    color: "black",
+                },
+            },
+        },
     },
 });
 
@@ -63,7 +80,7 @@ export const layoutStyles = {
     contentContainer: {
         display: "grid",
         gridTemplateRows: "auto 1fr",
-        gridTemplateColumns: "300px 1fr",
+        gridTemplateColumns: "330px 1fr",
         gap: "16px",
         padding: "16px",
         height: "calc(100vh - 64px)",
@@ -80,7 +97,7 @@ export const layoutStyles = {
 // Sidebar Styles
 export const sidebarStyles = {
     container: {
-        width: "300px",
+        width: "330px",
         backgroundColor: "#f9f9f9",
         borderRadius: "8px",
         display: "flex",
@@ -106,7 +123,7 @@ export const typographyStyles = {
 // Sidebar Box Styles
 export const boxStyles = {
     container: {
-        width: "95%",
+        width: "90%",
         display: "flex",
         flexDirection: "column",
         padding: "16px",
