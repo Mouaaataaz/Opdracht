@@ -1,38 +1,42 @@
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, ThemeProvider, CssBaseline } from "@mui/material";
 
 
 import { Header } from "~/Components/Header";
 import {Sidebar} from "~/Components/Sidebar";
 import { MapView} from "~/Components/Map";
-import { layoutStyles, mapStyles } from "~/Components/styles";
+import { theme } from "~/Components/styles";
 
 
 export default function Index() {
     return (
-        <Box sx={layoutStyles.container}>
-            {/* Header */}
-            <Box sx={layoutStyles.header}>
-                <Header />
-            </Box>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {/* Main Layout Container */}
+            <Box className="layout-container">
 
-            {/* Content */}
-            <Box sx={layoutStyles.contentContainer}>
-                {/* "Dossiers" Title */}
-                <Box sx={layoutStyles.dossiersTitle}>
-                    <Typography >
-                        Dossiers
-                    </Typography>
+                {/* Header */}
+                <Box className="header">
+                    <Header />
                 </Box>
 
-                <Sidebar />
+                {/* Content */}
+                <Box className="contentContainer">
 
-                {/* Main Content Section (Map) */}
-                <Box sx={mapStyles.container}>
-                    {/* Placeholder for the map */}
-                    <MapView />
+                    {/* Dossier Text */}
+                    <Box className="infoRow">
+                        <Typography variant="h6">Dossier</Typography>
+                    </Box>
+
+                    {/* Sidebar */}
+                    <Sidebar />
+
+                    {/* Main Content Section (Map) */}
+                    <Box className="mapContainer">
+                        <MapView />
+                    </Box>
                 </Box>
             </Box>
-        </Box>
+        </ThemeProvider>
     );
 }

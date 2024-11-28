@@ -12,7 +12,6 @@ export const theme = createTheme({
                     display: "grid",
                     gridTemplateRows: "auto",
                     position: "fixed",
-                    zIndex: 1201,
                 },
             },
         },
@@ -25,32 +24,11 @@ export const theme = createTheme({
                 },
             },
         },
-        MuiBox: {
-            styleOverrides: {
-                root: {
-                    color: "black",
-                    display: "flex",
-                    flexGrow: 1,
-                    alignItems: "center",
-                    gap: 4,
-                },
-            },
-        },
         MuiButton: {
             styleOverrides: {
                 root: {
                     color: "black",
-                    textDecoration: "none",
                     textTransform: "none",
-                    gap: 5,
-                },
-            },
-        },
-        MuiDrawer: {
-            styleOverrides:{
-                paper: {
-                    width:"250px",
-                    padding:"16px"
                 },
             },
         },
@@ -61,104 +39,92 @@ export const theme = createTheme({
                 },
             },
         },
+        MuiCssBaseline: {
+            styleOverrides: {
+                body: {
+                    display: "grid",
+                    gridTemplateRows: "64px auto",
+                    height: "100vh",
+                },
+                ".layout-container": {
+                    display: "grid",
+                    gridTemplateRows: "64px auto",
+                    height: "100vh",
+                },
+                ".contentContainer": {
+                    display: "grid",
+                    gridTemplateRows: "auto 1fr",
+                    gridTemplateColumns: "auto 1fr",
+                    gap: "16px",
+                    padding: "16px",
+                    height: "calc(100vh - 64px)",
+                },
+                // Dossier Styles
+                ".infoRow": {
+                    gridColumn: "1 / -1",
+                    padding: "10px 16px",
+                    backgroundColor: "lightgrey",
+                    borderRadius: "25px",
+                    color: "black",
+
+                },
+                // Map Styles
+                ".mapContainer": {
+                    position: "relative",
+                    borderRadius: "40px",
+
+                    height: "100%", // Fill the content area
+                    width: "100%",  // Ensure full width
+                    overflow: "hidden", // Prevent extra overflow
+                },
+                // Sidebar styles
+                ".sidebarContainer": {
+                    width: "350px",
+                    backgroundColor: "#f9f9f9",
+                    borderRadius: "8px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                    height: "100%",
+                    overflowY: "auto",
+                },
+                ".sidebarFilterSection": {
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                },
+                // Typography Styles
+                ".typographyContainer": {
+                    backgroundColor: "#899499",
+                    padding: "15px",
+                },
+                // Sidebar Box Styles
+                ".boxContainer": {
+                    width: "90%",
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: "16px",
+                    borderRadius: "16px",
+                    backgroundColor: "#f9f9f9",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                    gap: "8px",
+                    margin:"auto",
+                },
+                ".boxHeader": {
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                },
+                ".boxFooter": {
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                },
+            },
+        },
+
     },
 });
 
-// Layout Styles
-export const layoutStyles = {
-    container: {
-        display: "grid",
-        gridTemplateRows: "64px auto",
-        gridTemplateColumns: "1fr",
-        height: "100vh",
-        gap: 0,
-    },
-    header: {
-        gridColumn: "1 / -1",
-        padding: "16px",
-    },
-    contentContainer: {
-        display: "grid",
-        gridTemplateRows: "auto 1fr",
-        gridTemplateColumns: "330px 1fr",
-        gap: "16px",
-        padding: "16px",
-        height: "calc(100vh - 64px)",
-    },
-    dossiersTitle: {
-        gridColumn: "1 / -1",
-        marginBottom: "8px",
-        backgroundColor: "lightgray",
-        padding:"10px",
-        borderRadius:"20px"
-    },
-};
 
-// Sidebar Styles
-export const sidebarStyles = {
-    container: {
-        width: "330px",
-        backgroundColor: "#f9f9f9",
-        borderRadius: "8px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-        height: "100%",
-        overflowY: "auto",
-    },
-    filterSection: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-    },
-};
-
-export const typographyStyles = {
-    container: {
-        backgroundColor: "#899499",
-        padding: "15px",
-    },
-};
-
-// Sidebar Box Styles
-export const boxStyles = {
-    container: {
-        width: "90%",
-        display: "flex",
-        flexDirection: "column",
-        padding: "16px",
-        borderRadius: "16px",
-        backgroundColor: "#fff",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-        gap: "8px",
-    },
-    header: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-    },
-    footer: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-};
-
-// Map Styles
-export const mapStyles = {
-    container: {
-        backgroundColor: "#f1f1f1f1",
-        borderRadius: "40px",
-        position: "relative",
-        overflow: "hidden",
-        height: "100%",
-    },
-    placeholderText: {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        color: "#aaa",
-    },
-};
 

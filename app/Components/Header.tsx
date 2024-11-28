@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
     AppBar,
     Box,
@@ -20,7 +21,7 @@ export function Header() {
                             alt="Logo"/>
                        {/* Navigation Links */}
                        <Box>
-                           <Button to="/Home">Link naar deze pagina</Button>
+                           <Button component={Link} to="/dossiers">Link naar deze pagina</Button>
                            <Button to="/">Update GeoJSON</Button>
                            <Button to="/">Upload GeoJSON</Button>
                            <Button to="/">Help</Button>

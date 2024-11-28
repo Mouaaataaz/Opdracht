@@ -1,56 +1,54 @@
-import { Box, Typography, Paper, IconButton, Checkbox, Divider } from "@mui/material";
-import { sidebarStyles, boxStyles, typographyStyles } from "~/Components/styles";
+import {Box, Typography, IconButton, Checkbox} from "@mui/material";
 
 
 function SidebarBox() {
     return (
-        <Paper sx={boxStyles.container} elevation={3}>
-            {/* Header with Time Icon */}
-            <Box sx={boxStyles.header}>
-
-                <Typography variant="body2" sx={{ fontWeight: "bold", color: "#555" }}>
+        <Box className="boxContainer">
+            {/* Header */}
+            <Box className="boxHeader">
+                <Typography variant="body2" className="boxHeaderText">
                     Nog 3 dagen
                 </Typography>
             </Box>
 
             {/* Title and Subtitle */}
             <Box>
-                <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: "4px" }}>
+                <Typography variant="h6" className="boxTitle">
                     Aanvraag
                 </Typography>
-                <Typography variant="body2" sx={{ color: "#888" }}>
+                <Typography variant="body2" className="boxSubtitle">
                     CaPaKey
                 </Typography>
             </Box>
 
-            {/* Footer with ID and Info Icon */}
-            <Box sx={boxStyles.footer}>
-                <Typography variant="body2" sx={{ color: "#888" }}>
+            {/* Footer */}
+            <Box className="boxFooter">
+                <Typography variant="body2" className="boxFooterText">
                     450ZTB0332/00R000
                 </Typography>
-                <IconButton sx={{ padding: 0 }}>
-
+                <IconButton className="boxIconButton">
+                    {/* Add Icon */}
                 </IconButton>
             </Box>
 
             {/* Reference */}
-            <Typography variant="body2" sx={{ color: "#888" }}>
+            <Typography variant="body2" className="boxReference">
                 Vip referentie: VIP-0000011
             </Typography>
-        </Paper>
+        </Box>
     );
 }
 
 
 export function Sidebar() {
     return (
-        <Box sx={sidebarStyles.container}>
+        <Box className="sidebarContainer">
             {/* Filters Section */}
-            <Typography sx={typographyStyles.container}>Todo: filters</Typography>
-            <Divider />
+            <Typography className="typographyContainer">Todo: filters</Typography>
+
 
             {/* Checkbox and Text in the Same Row */}
-            <Box sx={sidebarStyles.filterSection}>
+            <Box className="sidebarFilterSection">
                 <Checkbox />
                 <Typography>Toon enkel dossiers van op de kaart</Typography>
             </Box>
@@ -60,5 +58,6 @@ export function Sidebar() {
             <SidebarBox />
             <SidebarBox />
         </Box>
+
     );
 }
