@@ -1,4 +1,5 @@
 import React from "react";
+import { Form, useActionData } from "@remix-run/react";
 import {
     Typography,
     Toolbar,
@@ -14,7 +15,57 @@ import {
 } from "@mui/material";
 import { faTrash, faUser, faBookOpen, faPersonWalking, faArrowUpLong, faRotate, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { theme } from "~/theme/theme"; 
+import { theme } from "~/theme/theme";
+import { json } from "@remix-run/node";
+import fs from "fs";
+
+import path from "path";
+
+// Action function to handle form submission
+export async function action({ request }: { request: Request }) {
+    const formData = await request.formData();
+
+    // Define the path to the JSON file
+    const filePath = path.resolve("./test.json");
+
+    // Read existing data from the JSON file
+    let existingData;
+    try {
+        const fileContents = fs.readFileSync(filePath, "utf-8");
+        existingData = JSON.parse(fileContents);
+        // Ensure existingData is an array to allow adding multiple entries
+        if (!Array.isArray(existingData)) {
+            existingData = []; // Reset to an array if the file contents are not an array
+        }
+    } catch (error) {
+        console.error("Error reading the JSON file:", error);
+        return json({ success: false, message: "Failed to read data from the JSON file." });
+    }
+
+    // Create a new object from the submitted form data
+    const newEntry = {
+        onderwerp: formData.get("onderwerp") || "",
+        reference: formData.get("reference") || "",
+        type: formData.get("type") || "",
+        validFrom: formData.get("validFrom") || "",
+        validTo: formData.get("validTo") || "",
+    };
+
+    // Append the new entry to the existing data array
+    existingData.push(newEntry);
+
+    // Write the updated array back to the JSON file
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2), "utf-8");
+    } catch (error) {
+        console.error("Error writing to the JSON file:", error);
+        return json({ success: false, message: "Failed to save form data." });
+    }
+
+    // Return success response
+    return json({ success: true, message: "Form data added successfully!", data: newEntry });
+}
+
 
 // Sidebar Component
 function Sidebar() {
@@ -36,7 +87,11 @@ function Sidebar() {
 }
 
 // Main Component
-function FormExample() {
+function View() {
+    const actionData = useActionData<typeof action>();
+
+
+
     const formFields = [
         { label: "Onderwerp", name: "onderwerp", defaultValue: "Voorstel erfnummer 27", xs: 12 },
         { label: "Referentie", name: "reference", defaultValue: "123456/ERFG", xs: 6 },
@@ -61,71 +116,89 @@ function FormExample() {
                             sx={{ height: 40 }}
                         />
                         {/* Navigation Links */}
-                        <Box sx={{ display: "flex", gap: 2, ml: "auto", textDecoration:"none", textTransform:"none" }}>
-                            
-                            <Button  startIcon={<FontAwesomeIcon icon={faPaperclip} />}/>
-                            <Button  startIcon={<FontAwesomeIcon icon={faRotate} />}/>
-                            <Button  startIcon={<FontAwesomeIcon icon={faArrowUpLong} />}/>
-                            <Button  startIcon={<FontAwesomeIcon icon={faPersonWalking} />}/>
-                            <Button  startIcon={<FontAwesomeIcon icon={faBookOpen} />}/>
-                            <Button  startIcon={<FontAwesomeIcon icon={faUser} />}></Button>
+                        <Box sx={{ display: "flex", gap: 2, ml: "auto", textDecoration: "none", textTransform: "none" }}>
+
+                            <Button startIcon={<FontAwesomeIcon icon={faPaperclip} />} />
+                            <Button startIcon={<FontAwesomeIcon icon={faRotate} />} />
+                            <Button startIcon={<FontAwesomeIcon icon={faArrowUpLong} />} />
+                            <Button startIcon={<FontAwesomeIcon icon={faPersonWalking} />} />
+                            <Button startIcon={<FontAwesomeIcon icon={faBookOpen} />} />
+                            <Button startIcon={<FontAwesomeIcon icon={faUser} />}></Button>
                             <Button >Naam Gemeente</Button>
                         </Box>
                     </Toolbar>
                 </AppBar>
 
                 {/* Content Area */}
-                <Box sx={{ display: "grid", gridTemplateColumns: "250px 1fr", height: "100%", overflow: "hidden", gridTemplateColumns: "250px 1px 1fr" }}>
+                <Box sx={{ display: "grid", height: "100%", overflow: "hidden", gridTemplateColumns: "250px 1px 1fr" }}>
                     {/* Sidebar */}
                     <Sidebar />
-                    
-                        {/* Divider */}
-                         <Box sx={{ backgroundColor: "#ddd", width: "1px" }} />
+
+                    {/* Divider */}
+                    <Box sx={{ backgroundColor: "#ddd", width: "1px", height: "100%"}} />
 
                     {/* Form Container */}
-                    <Box sx={{ overflowY: "hidden", padding: 2 }}>
-                        <Grid container spacing={3} alignItems="center">
-                            {/* Header with Buttons */}
-                            <Grid item xs={8}>
-                                <Typography variant="h5">VIP-00000011 / Onroerend erfgoed</Typography>
-                            </Grid>
-                            
-                            <Grid item xs={4}sx={{display: "flex", justifyContent: "flex-end", gap: 2 }}>
-                                <Button variant="outlined">1 openstaande inlichting</Button>
-                                <Button variant="contained">Dossier weigeren</Button>
-                            </Grid>
-                        </Grid>
+                    <Form method="post">
+                        <Box sx={{ overflowY: "auto", padding: 2, height: "100%", display:"flex", flexDirection:"column" }}>
+                            <Grid container spacing={1} alignItems="center">
+                                {/* Header with Buttons */}
+                                <Grid item xs={8}>
+                                    <Typography variant="h5">VIP-00000011 / Onroerend erfgoed</Typography>
+                                </Grid>
 
-                        {/* Form Fields */}
-                        <Grid container spacing={3}>
-                            {formFields.map(({ label, name, defaultValue, xs, type }, index) => (
-                                <Grid key={index} item xs={xs}>
-                                    <Typography>{label}</Typography>
+                                <Grid item xs={4} sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+                                    <Button variant="outlined">1 openstaande inlichting</Button>
+                                    <Button variant="contained">Dossier weigeren</Button>
+                                </Grid>
+                            </Grid>
+
+                            {/* Form Fields */}
+                            <Grid container spacing={1}>
+                                {formFields.map(({ label, name, defaultValue, xs, type }, index) => (
+                                    <Grid key={index} item xs={xs}>
+                                        <Typography>{label}</Typography>
+                                        <TextField
+                                            name={name}
+                                            type={type || "text"}
+                                            variant="outlined"
+                                            fullWidth
+                                            defaultValue={defaultValue}
+                                        />
+                                    </Grid>
+                                ))}
+                                <Grid item xs={12}>
+                                    <Typography>Bijlages</Typography>
                                     <TextField
-                                        name={name}
-                                        type={type || "text"}
+                                        name="attachments"
+                                        type="file"
                                         variant="outlined"
                                         fullWidth
-                                        defaultValue={defaultValue}
+                                        helperText="Het bestand is verplicht een PDF met een maximale bestandsgrootte van 8MB"
                                     />
+                                     {/* Submit Button */}
+                                <Box sx={{ display: "flex", justifyContent: "flex-end"}}>
+                                      {/* Display Feedback */}
+                                {actionData?.message && (
+                                    <p style={{ color: actionData.success ? "green" : "red" }}>
+                                        {actionData.message}
+                                    </p>
+                                )}
+                                    <Button variant="contained" type="submit">
+                                        Submit Form
+                                    </Button>
+                                  
+                                </Box>
                                 </Grid>
-                            ))}
-                            <Grid item xs={12}>
-                                <Typography>Bijlages</Typography>
-                                <TextField
-                                    name="attachments"
-                                    type="file"
-                                    variant="outlined"
-                                    fullWidth
-                                    helperText="Het bestand is verplicht een PDF met een maximale bestandsgrootte van 8MB"
-                                />
+                               
                             </Grid>
-                        </Grid>
-                    </Box>
+
+
+                        </Box>
+                    </Form>
                 </Box>
             </Box>
         </ThemeProvider>
     );
 }
 
-export default FormExample;
+export default View;
