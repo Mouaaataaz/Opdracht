@@ -21,29 +21,29 @@ import fs from "fs";
 
 import path from "path";
 
-// Action function to handle form submission
-export async function action({ request }: { request: Request }) {
-    const formData = await request.formData();
+// Define the path to the JSON file
+const filePath = path.resolve("./test.json");
 
-    // Define the path to the JSON file
-    const filePath = path.resolve("./test.json");
-
-    // Read existing data from the JSON file
+// Loader function to provide data to the form
+export async function loader() {
     let existingData;
     try {
         const fileContents = fs.readFileSync(filePath, "utf-8");
         existingData = JSON.parse(fileContents);
-        // Ensure existingData is an array to allow adding multiple entries
-        if (!Array.isArray(existingData)) {
-            existingData = []; // Reset to an array if the file contents are not an array
-        }
     } catch (error) {
         console.error("Error reading the JSON file:", error);
-        return json({ success: false, message: "Failed to read data from the JSON file." });
+        existingData = {}; // Provide an empty object as fallback
     }
 
+    return json({ data: existingData });
+}
+
+// Action function to handle form submission
+export async function action({ request }: { request: Request }) {
+    const formData = await request.formData();
+
     // Create a new object from the submitted form data
-    const newEntry = {
+    const newData = {
         onderwerp: formData.get("onderwerp") || "",
         reference: formData.get("reference") || "",
         type: formData.get("type") || "",
@@ -51,19 +51,16 @@ export async function action({ request }: { request: Request }) {
         validTo: formData.get("validTo") || "",
     };
 
-    // Append the new entry to the existing data array
-    existingData.push(newEntry);
-
-    // Write the updated array back to the JSON file
+    // Overwrite the JSON file with the new data
     try {
-        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2), "utf-8");
+        fs.writeFileSync(filePath, JSON.stringify(newData, null, 2), "utf-8");
     } catch (error) {
         console.error("Error writing to the JSON file:", error);
         return json({ success: false, message: "Failed to save form data." });
     }
 
     // Return success response
-    return json({ success: true, message: "Form data added successfully!", data: newEntry });
+    return json({ success: true, message: "Form data saved successfully!", data: newData });
 }
 
 

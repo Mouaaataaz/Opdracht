@@ -1,16 +1,7 @@
-[
-  {
-    "onderwerp": "b",
-    "reference": "123456/ERFG",
-    "type": "Beschermd artikel of aangewezen",
-    "validFrom": "2023-01-01",
-    "validTo": "2023-12-31"
-  },
-  {
-    "onderwerp": "a",
-    "reference": "123456/ERFG",
-    "type": "Beschermd artikel of aangewezen",
-    "validFrom": "2023-01-01",
-    "validTo": "2023-12-31"
-  }
-]
+{
+  "onderwerp": "a",
+  "reference": "123456/ERFG",
+  "type": "Beschermd artikel of aangewezen",
+  "validFrom": "2023-01-01",
+  "validTo": "2023-12-31"
+}
